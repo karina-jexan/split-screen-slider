@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Split Screen Slider</title>
+    <link rel="stylesheet" href="css/sass/screen-slider.css" />
+  </head>
+  <body>
+    <div id="wrapper-1">
+      <div class="wrapper-split-content skewed">
+        <div class="layer bottom">
+          <div class="content-wrap">
+            <div class="content-body">
+              <h1>Look Sharp</h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Cupiditate explicabo distinctio natus veritatis molestiae
+                officia quod est itaque sequi numquam?
+              </p>
+            </div>
+            <img src="img/pc1.png" alt="" />
+          </div>
+        </div>
+        <div class="layer top">
+          <div class="content-wrap">
+            <div class="content-body">
+              <h1>Stay Cool</h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Cupiditate explicabo distinctio natus veritatis molestiae
+                officia quod est itaque sequi numquam?
+              </p>
+            </div>
+            <img src="img/pc2.png" alt="" />
+          </div>
+        </div>
+        <div class="slider">
+          <div class="handle" draggable="true"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="wrapper-2">
+      <div class="wrapper-split-content skewed">
+        <div class="layer bottom">
+          <div class="content-wrap">
+            <div class="content-body">
+              <h1>Look Sharp</h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Cupiditate explicabo distinctio natus veritatis molestiae
+                officia quod est itaque sequi numquam?
+              </p>
+            </div>
+            <img src="img/pc1.png" alt="" />
+          </div>
+        </div>
+        <div class="layer top">
+          <div class="content-wrap">
+            <div class="content-body">
+              <h1>Stay Cool</h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Cupiditate explicabo distinctio natus veritatis molestiae
+                officia quod est itaque sequi numquam?
+              </p>
+            </div>
+            <img src="img/pc2.png" alt="" />
+          </div>
+        </div>
+        <div class="slider">
+          <div class="handle" draggable="true"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script src="js/main.js"></script>-->
+    <script src="js/class-screen-slider.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        new ScreenSlider("wrapper-1");
+        new ScreenSlider("wrapper-2");
+      });
+    </script>
+  </body>
+</html>
