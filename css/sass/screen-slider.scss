@@ -3,6 +3,9 @@ $bottom-layer-bg: #222;
 $top-layer-bg: #f1f1f1;
 $handle-color: #e000d9;
 $slider-color: #fdab00;
+$skewed-portion: 70vw;
+$slider-position: 70%;
+$handle-size: 70px;
 
 body {
   margin: 0;
@@ -85,19 +88,30 @@ body {
   background-color: $slider-color;
   width: 10px;
   top: 0;
-  left: 50%;
+  left: $slider-position;
   z-index: 3;
   display: flex;
   justify-content: center;
+
+  &.slider-animation {
+    animation-name: slider-animation;
+    animation-duration: 4s;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
 }
 
 .handle {
   position: absolute;
   top: 50%;
-  width: 50px;
-  height: 50px;
+  width: $handle-size;
+  height: $handle-size;
   background-color: $handle-color;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 4;
 }
 
@@ -112,8 +126,15 @@ body {
   .top {
     transform: skew(-30deg);
     margin-left: -1000px;
-    width: calc(50vw + 1000px);
+    width: calc(#{$skewed-portion} + 1000px);
 
+    &.top-layer-animation {
+      animation-name: top-layer-animation;
+      animation-duration: 4s;
+      animation-delay: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
     .content-wrap {
       transform: skew(30deg);
       margin-left: 1000px;
@@ -121,8 +142,33 @@ body {
   }
 }
 
-@media (max-width: 768px) {
-  body {
-    font-size: 75%;
+/* The animation code */
+@keyframes slider-animation {
+  12.5% {
+    left: calc(#{$slider-position} - 10%);
+  }
+  25% {
+    left: $slider-position;
+  }
+  37.5% {
+    left: calc(#{$slider-position} - 10%);
+  }
+  50% {
+    left: $slider-position;
+  }
+}
+
+@keyframes top-layer-animation {
+  12.5% {
+    width: calc((#{$skewed-portion} - 10vw) + 1000px);
+  }
+  25% {
+    width: calc(#{$skewed-portion} + 1000px);
+  }
+  37.5% {
+    width: calc((#{$skewed-portion} - 10vw) + 1000px);
+  }
+  50% {
+    width: calc(#{$skewed-portion} + 1000px);
   }
 }

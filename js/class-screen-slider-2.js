@@ -1,8 +1,5 @@
 class ScreenSlider {
   constructor(wrapperID) {
-    /**
-     * Initialize elements
-     */
     this.wrapperID = wrapperID;
     this.wrapper = document.getElementById(this.wrapperID);
     this.slider = this.wrapper.querySelector(".slider");
@@ -16,33 +13,21 @@ class ScreenSlider {
     }
 
     /**
-     * Event listeners for mouse and touch actions
+     * When the element draggin stops
      */
-    this.handle.addEventListener("mousedown", event => {
-      event.preventDefault();
-      // Remove CSS animation class from slider and top layer
-      this.removeAnimation();
+    this.dragEnd = function(event) {
+      document.removeEventListener("mouseup", this.onDragEndHandler);
+      document.removeEventListener("mousemove", this.onDragHandler);
 
-      document.addEventListener("mouseup", this.onDragEndHandler);
-      document.addEventListener("mousemove", this.onDragHandler);
-      this.handle.addEventListener("dragstart", event =>
-        event.preventDefault()
-      );
-    });
+      document.removeEventListener("touchend", this.onDragEndHandler);
+      document.removeEventListener("touchmove", this.onDragHandler);
+    };
 
-    this.handle.addEventListener("touchstart", event => {
-      event.preventDefault();
-
-      document.addEventListener("touchend", this.onDragEndHandler);
-      document.addEventListener("touchmove", this.onDragHandler);
-    });
+    this.onDragEndHandler = this.dragEnd.bind(this);
 
     /**
-     * Functions to handle the slider.
-     * drag - handles when the element is beign dragged
-     * dragEnd- when the dragging stops
+     * When the element is beign dragged
      */
-
     this.drag = function(event) {
       if (event.type === "touchmove") {
         this.slider.style.left = event.touches[0].clientX + "px";
@@ -53,20 +38,36 @@ class ScreenSlider {
       }
     };
 
-    this.dragEnd = function(event) {
-      document.removeEventListener("mouseup", this.onDragEndHandler);
-      document.removeEventListener("mousemove", this.onDragHandler);
-
-      document.removeEventListener("touchend", this.onDragEndHandler);
-      document.removeEventListener("touchmove", this.onDragHandler);
-    };
-
-    /**
-     * Handlers - The reference of the functions sent to the eventListeners
-     * is stored in a property to be used later on in the removeEventListeners
-     */
-    this.onDragEndHandler = this.dragEnd.bind(this);
     this.onDragHandler = this.drag.bind(this);
+
+    this.handle.addEventListener("mousedown", event => {
+      event.preventDefault();
+
+      document.addEventListener("mouseup", this.onDragEndHandler);
+      document.addEventListener("mousemove", this.dragFunction);
+      this.handle.addEventListener("dragstart", event =>
+        event.preventDefault()
+      );
+    });
+
+    this.handle.addEventListener("touchstart", event => {
+      event.preventDefault();
+
+      document.addEventListener("touchend", this.onDragEndHandler);
+      document.addEventListener("touchmove", this.dragFunction);
+    });
+  }
+
+  initializeDrag() {
+    this.dragFunction = function() {
+      if (event.type === "touchmove") {
+        this.slider.style.left = event.touches[0].clientX + "px";
+        this.topLayer.style.width = event.touches[0].clientX + this.skew + "px";
+      } else {
+        this.slider.style.left = event.clientX + "px";
+        this.topLayer.style.width = event.clientX + this.skew + "px";
+      }
+    };
   }
 
   checkInsideViewPort() {
@@ -85,10 +86,5 @@ class ScreenSlider {
     ) {
       return "rigth";
     }
-  }
-
-  removeAnimation() {
-    this.slider.classList.remove("slider-animation");
-    this.topLayer.classList.remove("top-layer-animation");
   }
 }

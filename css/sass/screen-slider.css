@@ -81,7 +81,7 @@ body {
   background-color: #fdab00;
   width: 10px;
   top: 0;
-  left: 50%;
+  left: 70%;
   z-index: 3;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -91,13 +91,35 @@ body {
           justify-content: center;
 }
 
+.slider.slider-animation {
+  -webkit-animation-name: slider-animation;
+          animation-name: slider-animation;
+  -webkit-animation-duration: 4s;
+          animation-duration: 4s;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+}
+
 .handle {
   position: absolute;
   top: 50%;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   background-color: #e000d9;
   border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   z-index: 4;
 }
 
@@ -114,7 +136,20 @@ body {
   -webkit-transform: skew(-30deg);
           transform: skew(-30deg);
   margin-left: -1000px;
-  width: calc(50vw + 1000px);
+  width: calc(70vw + 1000px);
+}
+
+.skewed .top.top-layer-animation {
+  -webkit-animation-name: top-layer-animation;
+          animation-name: top-layer-animation;
+  -webkit-animation-duration: 4s;
+          animation-duration: 4s;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
 }
 
 .skewed .top .content-wrap {
@@ -123,9 +158,63 @@ body {
   margin-left: 1000px;
 }
 
-@media (max-width: 768px) {
-  body {
-    font-size: 75%;
+/* The animation code */
+@-webkit-keyframes slider-animation {
+  12.5% {
+    left: calc(70% - 10%);
+  }
+  25% {
+    left: 70%;
+  }
+  37.5% {
+    left: calc(70% - 10%);
+  }
+  50% {
+    left: 70%;
+  }
+}
+@keyframes slider-animation {
+  12.5% {
+    left: calc(70% - 10%);
+  }
+  25% {
+    left: 70%;
+  }
+  37.5% {
+    left: calc(70% - 10%);
+  }
+  50% {
+    left: 70%;
+  }
+}
+
+@-webkit-keyframes top-layer-animation {
+  12.5% {
+    width: calc((70vw - 10vw) + 1000px);
+  }
+  25% {
+    width: calc(70vw + 1000px);
+  }
+  37.5% {
+    width: calc((70vw - 10vw) + 1000px);
+  }
+  50% {
+    width: calc(70vw + 1000px);
+  }
+}
+
+@keyframes top-layer-animation {
+  12.5% {
+    width: calc((70vw - 10vw) + 1000px);
+  }
+  25% {
+    width: calc(70vw + 1000px);
+  }
+  37.5% {
+    width: calc((70vw - 10vw) + 1000px);
+  }
+  50% {
+    width: calc(70vw + 1000px);
   }
 }
 /*# sourceMappingURL=screen-slider.css.map */
