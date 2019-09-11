@@ -50,7 +50,7 @@ class ScreenSlider {
         // Remove CSS animation class from slider and top layer
         this.removeAnimation();
 
-        this.completeSlide();
+        this.completeSlide(event);
       });
 
       this.handle.addEventListener("touchstart", event => {
@@ -58,7 +58,7 @@ class ScreenSlider {
         // Remove CSS animation class from slider and top layer
         this.removeAnimation();
 
-        this.completeSlide();
+        this.completeSlide(event);
       });
     }
 
@@ -123,6 +123,7 @@ class ScreenSlider {
   }
 
   updateOpacity(event) {
+    console.log(event.pageX);
     let positionX = event.pageX;
     let windowWidth = window.innerWidth;
     let deltaBottom;
@@ -132,5 +133,18 @@ class ScreenSlider {
     this.topContainer.style.opacity = 1 - deltaBottom;
   }
 
-  completeSlide() {}
+  completeSlide(event) {
+    let initialPosition = event.pageX;
+    let currentPosition = initialPosition;
+    let movement = setInterval(() => {
+      console.log(currentPosition);
+      if (currentPosition < 0) {
+        clearInterval(movement);
+      } else {
+        currentPosition = currentPosition - 5;
+        this.slider.style.left = currentPosition + "px";
+        this.topLayer.style.width = currentPosition + this.skew + "px";
+      }
+    }, 5);
+  }
 }
