@@ -1,5 +1,5 @@
 class ScreenSlider {
-  constructor(wrapperID) {
+  constructor(wrapperID, click = false) {
     /**
      * Initialize elements
      */
@@ -8,9 +8,11 @@ class ScreenSlider {
     this.slider = this.wrapper.querySelector(".slider");
     this.handle = this.wrapper.querySelector(".handle");
     this.topLayer = this.wrapper.querySelector(".top");
-    this.bottomText = this.wrapper.querySelector(".bottom-text");
+    this.bottomContainer = this.wrapper.querySelector(".bottom .content-body");
+    this.topContainer = this.wrapper.querySelector(".top .content-body");
     this.skew = 0;
     this.touchEvent;
+    this.eventListeners;
 
     if (this.wrapper.firstElementChild.classList.contains("skewed") === true) {
       this.skew = 1000;
@@ -19,24 +21,46 @@ class ScreenSlider {
     /**
      * Event listeners for mouse and touch actions
      */
-    this.handle.addEventListener("mousedown", event => {
-      event.preventDefault();
-      // Remove CSS animation class from slider and top layer
-      this.removeAnimation();
 
-      document.addEventListener("mouseup", this.onDragEndHandler);
-      document.addEventListener("mousemove", this.onDragHandler);
-      this.handle.addEventListener("dragstart", event =>
-        event.preventDefault()
-      );
-    });
+    //Validate if the handler needs to be clicked or dragged
+    if (click === false) {
+      this.handle.addEventListener("mousedown", event => {
+        event.preventDefault();
+        // Remove CSS animation class from slider and top layer
+        this.removeAnimation();
 
-    this.handle.addEventListener("touchstart", event => {
-      event.preventDefault();
+        document.addEventListener("mouseup", this.onDragEndHandler);
+        document.addEventListener("mousemove", this.onDragHandler);
+        this.handle.addEventListener("dragstart", event =>
+          event.preventDefault()
+        );
+      });
 
-      document.addEventListener("touchend", this.onDragEndHandler);
-      document.addEventListener("touchmove", this.onDragHandler);
-    });
+      this.handle.addEventListener("touchstart", event => {
+        event.preventDefault();
+        // Remove CSS animation class from slider and top layer
+        this.removeAnimation();
+
+        document.addEventListener("touchend", this.onDragEndHandler);
+        document.addEventListener("touchmove", this.onDragHandler);
+      });
+    } else {
+      this.handle.addEventListener("click", event => {
+        event.preventDefault();
+        // Remove CSS animation class from slider and top layer
+        this.removeAnimation();
+
+        this.completeSlide();
+      });
+
+      this.handle.addEventListener("touchstart", event => {
+        event.preventDefault();
+        // Remove CSS animation class from slider and top layer
+        this.removeAnimation();
+
+        this.completeSlide();
+      });
+    }
 
     /**
      * Functions to handle the slider.
@@ -71,6 +95,8 @@ class ScreenSlider {
     this.onDragHandler = this.drag.bind(this);
   }
 
+  eventListeners() {}
+
   checkInsideViewPort() {
     let handleBoundaries = this.handle.getBoundingClientRect();
     console.log(event);
@@ -98,14 +124,13 @@ class ScreenSlider {
 
   updateOpacity(event) {
     let positionX = event.pageX;
-    let positionY = event.pageY;
     let windowWidth = window.innerWidth;
-    let elementStyle = getComputedStyle(this.handle);
-    let delta;
-    let newOpacity;
+    let deltaBottom;
 
-    delta = (windowWidth - positionX) / windowWidth;
-    newOpacity = delta - 0.5;
-    this.bottomText.style.opacity = delta;
+    deltaBottom = (windowWidth - positionX) / windowWidth;
+    this.bottomContainer.style.opacity = deltaBottom;
+    this.topContainer.style.opacity = 1 - deltaBottom;
   }
+
+  completeSlide() {}
 }
