@@ -12,8 +12,7 @@ class ScreenSlider {
     this.topContainer = this.wrapper.querySelector(".top .content-body");
     this.closeIcon = this.wrapper.querySelector(".top i");
     this.skew = 0;
-    this.touchEvent;
-    this.eventListeners;
+    this.sliderPosition;
 
     if (this.wrapper.firstElementChild.classList.contains("skewed") === true) {
       this.skew = 1000;
@@ -62,6 +61,25 @@ class ScreenSlider {
         this.completeSlide(event);
       });
     }
+
+    /**
+     * Add events when the close icon is clicked or tapped
+     */
+    this.closeIcon.addEventListener("click", event => {
+      event.preventDefault();
+      // Remove CSS animation class from slider and top layer
+      this.resetAnimation();
+
+      this.resetSlider(event);
+    });
+
+    this.closeIcon.addEventListener("touchstart", event => {
+      event.preventDefault();
+      // Remove CSS animation class from slider and top layer
+      this.resetAnimation();
+
+      this.resetSlider(event);
+    });
 
     /**
      * Functions to handle the slider.
@@ -124,7 +142,6 @@ class ScreenSlider {
   }
 
   updateOpacity(event) {
-    console.log(event.pageX);
     let positionX = event.pageX;
     let windowWidth = window.innerWidth;
     let deltaBottom;
@@ -137,18 +154,22 @@ class ScreenSlider {
   completeSlide(event) {
     let initialPosition = event.pageX;
     let currentPosition = initialPosition;
+
+    //Update bottom layer opacity
+    this.bottomContainer.style.opacity = 1;
     let movement = setInterval(() => {
       // When the position is lower than 0 then stop the animation
       if (currentPosition < 0) {
         clearInterval(movement);
+        this.sliderPosition = currentPosition;
         this.updateCloseIcon("show");
         this.updateHandle("hide");
       } else {
-        currentPosition = currentPosition - 5;
+        currentPosition = currentPosition - 10;
         this.slider.style.left = currentPosition + "px";
         this.topLayer.style.width = currentPosition + this.skew + "px";
       }
-    }, 5);
+    }, 1);
   }
 
   updateCloseIcon(action) {
@@ -165,5 +186,21 @@ class ScreenSlider {
     } else {
       this.handle.style.display = "none";
     }
+  }
+
+  resetSlider(event) {
+    let currentPosition = initialPosition;
+    let movement = setInterval(() => {
+      // When the position is lower than 0 then stop the animation
+      if (currentPosition > window.innerWidth / 2) {
+        clearInterval(movement);
+        this.updateCloseIcon("show");
+        this.updateHandle("hide");
+      } else {
+        currentPosition = currentPosition - 5;
+        this.slider.style.left = currentPosition + "px";
+        this.topLayer.style.width = currentPosition + this.skew + "px";
+      }
+    }, 5);
   }
 }
