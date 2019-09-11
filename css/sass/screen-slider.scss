@@ -7,6 +7,7 @@ $skewed-portion: 70vw;
 $slider-position: 70%;
 $handle-size: 70px;
 $bottom-text-opacity: 0.5;
+$close-icon-color: white;
 
 body {
   margin: 0;
@@ -80,6 +81,15 @@ body {
   .content-body {
     left: 5%;
     color: #222;
+  }
+
+  i {
+    color: $close-icon-color;
+    position: absolute;
+    top: 5%;
+    left: 7%;
+    font-size: 1.2em;
+    cursor: pointer;
   }
 }
 

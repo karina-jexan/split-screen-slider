@@ -74,6 +74,15 @@ body {
   color: #222;
 }
 
+.top i {
+  color: white;
+  position: absolute;
+  top: 5%;
+  left: 7%;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
 .slider {
   position: absolute;
   height: 100%;

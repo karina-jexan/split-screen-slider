@@ -10,6 +10,7 @@ class ScreenSlider {
     this.topLayer = this.wrapper.querySelector(".top");
     this.bottomContainer = this.wrapper.querySelector(".bottom .content-body");
     this.topContainer = this.wrapper.querySelector(".top .content-body");
+    this.closeIcon = this.wrapper.querySelector(".top i");
     this.skew = 0;
     this.touchEvent;
     this.eventListeners;
@@ -137,14 +138,32 @@ class ScreenSlider {
     let initialPosition = event.pageX;
     let currentPosition = initialPosition;
     let movement = setInterval(() => {
-      console.log(currentPosition);
+      // When the position is lower than 0 then stop the animation
       if (currentPosition < 0) {
         clearInterval(movement);
+        this.updateCloseIcon("show");
+        this.updateHandle("hide");
       } else {
         currentPosition = currentPosition - 5;
         this.slider.style.left = currentPosition + "px";
         this.topLayer.style.width = currentPosition + this.skew + "px";
       }
     }, 5);
+  }
+
+  updateCloseIcon(action) {
+    if (action === "show") {
+      this.closeIcon.style.display = "block";
+    } else {
+      this.closeIcon.style.display = "none";
+    }
+  }
+
+  updateHandle(action) {
+    if (action === "show") {
+      this.handle.style.display = "block";
+    } else {
+      this.handle.style.display = "none";
+    }
   }
 }
