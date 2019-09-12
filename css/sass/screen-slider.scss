@@ -1,12 +1,12 @@
 $wrapper-min-height: 55vw;
 $bottom-layer-bg: rgb(185, 5, 59);
-$top-layer-bg: #f1f1f1;
+$top-layer-bg: #000000;
 $handle-color: #282c2b;
 $slider-color: #fdfdfd;
 $skewed-portion: 70vw;
 $slider-position: 70%;
 $handle-size: 80px;
-$bottom-text-opacity: 0.5;
+$bottom-text-opacity: 0.7;
 $close-icon-color: white;
 $icon-size: 1em;
 
@@ -40,6 +40,10 @@ body {
     position: absolute;
     width: 100vw;
     min-height: $wrapper-min-height;
+
+    video {
+      width: 100%;
+    }
   }
 
   .content-body {
@@ -66,10 +70,13 @@ body {
   background-color: $bottom-layer-bg;
   z-index: 1;
 
+  .content-wrap {
+    opacity: $bottom-text-opacity;
+  }
+
   .content-body {
     right: 5%;
     top: 80%;
-    opacity: $bottom-text-opacity;
   }
 
   h1 {

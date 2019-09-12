@@ -1,18 +1,23 @@
 class ScreenSlider {
-  constructor(wrapperID) {
+  constructor(wrapperID, videoTop = false, videoBottom = false) {
     /**
      * Initialize elements
      */
     this.wrapperID = wrapperID;
+    this.videoTopParam = videoTop;
+    this.videoBottomParam = videoBottom;
     this.wrapper = document.getElementById(this.wrapperID);
     this.slider = this.wrapper.querySelector(".slider");
     this.handle = this.wrapper.querySelector(".handle");
     this.topLayer = this.wrapper.querySelector(".top");
-    this.bottomContainer = this.wrapper.querySelector(".bottom .content-body");
-    this.topContainer = this.wrapper.querySelector(".top .content-body");
+    this.bottomContainer = this.wrapper.querySelector(".bottom .content-wrap");
+    this.topContainer = this.wrapper.querySelector(".top .content-wrap");
     this.closeIcon = this.wrapper.querySelector(".top i");
+    this.videoBottomElem = this.wrapper.querySelector(".bottom video");
+    this.videoTopElem = this.wrapper.querySelector(".top video");
     this.skew = 0;
     this.sliderPosition;
+    this.status = "closed";
 
     if (this.wrapper.firstElementChild.classList.contains("skewed") === true) {
       this.skew = 1000;
@@ -162,6 +167,10 @@ class ScreenSlider {
         clearInterval(movement);
         this.sliderPosition = currentPosition;
         this.updateCloseIcon("show");
+        if (this.videoBottomParam === true) {
+          this.playPauseVideo("bottom");
+        }
+        this.status = "open";
       } else {
         currentPosition = currentPosition - 10;
         this.slider.style.left = currentPosition + "px";
@@ -196,11 +205,25 @@ class ScreenSlider {
         this.updateHandle("show");
         this.topContainer.style.opacity = 1;
         this.bottomContainer.style.opacity = 0.5;
+        if (this.videoBottomParam === true) {
+          this.playPauseVideo("bottom");
+        }
       } else {
         currentPosition = currentPosition + 10;
         this.slider.style.left = currentPosition + "px";
         this.topLayer.style.width = currentPosition + this.skew + "px";
       }
     }, 0.000000001);
+  }
+
+  playPauseVideo(videoLocation) {
+    if (videoLocation === "bottom") {
+      if (this.videoBottomElem.paused) {
+        this.videoBottomElem.play();
+      } else this.videoBottomElem.pause();
+    } else {
+      if (this.videoTopElem.paused) this.videoTopElem.play();
+      else this.videoTopElem.pause();
+    }
   }
 }

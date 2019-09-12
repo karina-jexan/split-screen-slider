@@ -20,6 +20,9 @@
       <div class="wrapper-split-content skewed">
         <div class="layer bottom">
           <div class="content-wrap">
+            <video id="video1" muted="true" loop="true">
+              <source src="video/small.mp4" type="video/mp4" />
+            </video>
             <div class="content-body">
               <h2>Hurleys Expands Its Reach</h2>
             </div>
@@ -46,7 +49,7 @@
     <script src="js/class-screen-slider.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        new ScreenSlider("wrapper-1", true);
+        new ScreenSlider("wrapper-1", false, true);
       });
     </script>
   </body>
