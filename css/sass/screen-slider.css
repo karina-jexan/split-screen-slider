@@ -258,4 +258,10 @@ body {
   50% {
   }
 }
+
+@media (max-width: 768px) {
+  .content-body {
+    font-size: 75%;
+  }
+}
 /*# sourceMappingURL=screen-slider.css.map */
