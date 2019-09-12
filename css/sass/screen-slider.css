@@ -135,15 +135,21 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   z-index: 4;
+  -webkit-animation: shadow-pulse 1s infinite;
+          animation: shadow-pulse 1s infinite;
 }
 
 .handle:hover {
   width: 120px;
   height: 120px;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
 }
 
-.handle:hover i {
+.handle:hover i.fa-arrows-alt-h {
   font-size: 1.5em;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
 }
 
 .skewed .slider {
@@ -241,25 +247,25 @@ body {
   }
 }
 
-@-webkit-keyframes bottom-text-animation {
-  12.5% {
+@-webkit-keyframes shadow-pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.2);
   }
-  25% {
-  }
-  37.5% {
-  }
-  50% {
+  100% {
+    -webkit-box-shadow: 0 0 0 35px rgba(255, 255, 255, 0);
+            box-shadow: 0 0 0 35px rgba(255, 255, 255, 0);
   }
 }
 
-@keyframes bottom-text-animation {
-  12.5% {
+@keyframes shadow-pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.2);
   }
-  25% {
-  }
-  37.5% {
-  }
-  50% {
+  100% {
+    -webkit-box-shadow: 0 0 0 35px rgba(255, 255, 255, 0);
+            box-shadow: 0 0 0 35px rgba(255, 255, 255, 0);
   }
 }
 

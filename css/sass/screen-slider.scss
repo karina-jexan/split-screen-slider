@@ -131,13 +131,16 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 4;
+  animation: shadow-pulse 1s infinite;
 
   &:hover {
     width: $handle-size * 1.5;
     height: $handle-size * 1.5;
+    transition: 0.1s;
 
-    i {
+    i.fa-arrows-alt-h {
       font-size: $icon-size * 1.5;
+      transition: 0.1s;
     }
   }
 }
@@ -201,14 +204,12 @@ body {
   }
 }
 
-@keyframes bottom-text-animation {
-  12.5% {
+@keyframes shadow-pulse {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.2);
   }
-  25% {
-  }
-  37.5% {
-  }
-  50% {
+  100% {
+    box-shadow: 0 0 0 35px rgba(255, 255, 255, 0);
   }
 }
 
