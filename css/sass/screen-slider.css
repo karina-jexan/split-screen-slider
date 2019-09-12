@@ -135,8 +135,8 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   z-index: 4;
-  -webkit-animation: shadow-pulse 1s infinite;
-          animation: shadow-pulse 1s infinite;
+  -webkit-animation: shadow-pulse 2s infinite;
+          animation: shadow-pulse 2s infinite;
 }
 
 .handle:hover {
@@ -249,10 +249,14 @@ body {
 
 @-webkit-keyframes shadow-pulse {
   0% {
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
     -webkit-box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.2);
             box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.2);
   }
   100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
     -webkit-box-shadow: 0 0 0 35px rgba(255, 255, 255, 0);
             box-shadow: 0 0 0 35px rgba(255, 255, 255, 0);
   }
@@ -260,10 +264,14 @@ body {
 
 @keyframes shadow-pulse {
   0% {
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
     -webkit-box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.2);
             box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.2);
   }
   100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
     -webkit-box-shadow: 0 0 0 35px rgba(255, 255, 255, 0);
             box-shadow: 0 0 0 35px rgba(255, 255, 255, 0);
   }
