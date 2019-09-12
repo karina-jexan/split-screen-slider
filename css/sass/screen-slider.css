@@ -31,6 +31,10 @@ body {
   min-height: 55vw;
 }
 
+.layer .content-wrap video {
+  width: 100%;
+}
+
 .layer .content-body {
   width: 50%;
   position: absolute;
@@ -56,10 +60,13 @@ body {
   z-index: 1;
 }
 
+.bottom .content-wrap {
+  opacity: 0.7;
+}
+
 .bottom .content-body {
   right: 5%;
   top: 80%;
-  opacity: 0.5;
 }
 
 .bottom h1 {
@@ -67,7 +74,7 @@ body {
 }
 
 .top {
-  background-color: #f1f1f1;
+  background-color: #000000;
   color: #222;
   z-index: 2;
   width: 50vw;
