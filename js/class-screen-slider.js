@@ -67,17 +67,11 @@ class ScreenSlider {
      */
     this.closeIcon.addEventListener("click", event => {
       event.preventDefault();
-      // Remove CSS animation class from slider and top layer
-      this.resetAnimation();
-
       this.resetSlider(event);
     });
 
     this.closeIcon.addEventListener("touchstart", event => {
       event.preventDefault();
-      // Remove CSS animation class from slider and top layer
-      this.resetAnimation();
-
       this.resetSlider(event);
     });
 
@@ -174,30 +168,30 @@ class ScreenSlider {
 
   updateCloseIcon(action) {
     if (action === "show") {
-      this.closeIcon.style.display = "block";
+      this.closeIcon.classList.remove("hidden");
     } else {
-      this.closeIcon.style.display = "none";
+      this.closeIcon.classList.add("hidden");
     }
   }
 
   updateHandle(action) {
     if (action === "show") {
-      this.handle.style.display = "block";
+      this.handle.classList.remove("hidden");
     } else {
-      this.handle.style.display = "none";
+      this.handle.classList.add("hidden");
     }
   }
 
-  resetSlider(event) {
-    let currentPosition = initialPosition;
+  resetSlider() {
+    let currentPosition = this.sliderPosition;
     let movement = setInterval(() => {
-      // When the position is lower than 0 then stop the animation
-      if (currentPosition > window.innerWidth / 2) {
+      // When the position is greater than the 70% of the viewport the stop the animation
+      if (currentPosition / window.innerWidth > 0.7) {
         clearInterval(movement);
-        this.updateCloseIcon("show");
-        this.updateHandle("hide");
+        this.updateCloseIcon("hide");
+        this.updateHandle("show");
       } else {
-        currentPosition = currentPosition - 5;
+        currentPosition = currentPosition + 5;
         this.slider.style.left = currentPosition + "px";
         this.topLayer.style.width = currentPosition + this.skew + "px";
       }

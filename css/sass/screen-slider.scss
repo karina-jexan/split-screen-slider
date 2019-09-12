@@ -18,6 +18,10 @@ body {
   text-transform: uppercase;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .wrapper-split-content {
   position: relative;
   width: 100%;
@@ -115,6 +119,7 @@ body {
 }
 
 .handle {
+  cursor: pointer;
   position: absolute;
   top: 50%;
   width: $handle-size;
@@ -125,6 +130,11 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 4;
+
+  &:hover {
+    width: $handle-size * 1.5;
+    height: $handle-size * 1.5;
+  }
 }
 
 .skewed {

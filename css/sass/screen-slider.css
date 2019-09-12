@@ -7,6 +7,10 @@ body {
   text-transform: uppercase;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .wrapper-split-content {
   position: relative;
   width: 100%;
@@ -114,6 +118,7 @@ body {
 }
 
 .handle {
+  cursor: pointer;
   position: absolute;
   top: 50%;
   width: 70px;
@@ -130,6 +135,11 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   z-index: 4;
+}
+
+.handle:hover {
+  width: 105px;
+  height: 105px;
 }
 
 .skewed .slider {
