@@ -1,5 +1,5 @@
 class ScreenSlider {
-  constructor(wrapperID, click = false) {
+  constructor(wrapperID) {
     /**
      * Initialize elements
      */
@@ -22,45 +22,43 @@ class ScreenSlider {
      * Event listeners for mouse and touch actions
      */
 
-    //Validate if the handler needs to be clicked or dragged
-    if (click === false) {
-      this.handle.addEventListener("mousedown", event => {
-        event.preventDefault();
-        // Remove CSS animation class from slider and top layer
-        this.removeAnimation();
+    this.handle.addEventListener("mousedown", event => {
+      event.preventDefault();
+      // Remove CSS animation class from slider and top layer
+      this.removeAnimation();
+      //Remove the drag event listener
 
-        document.addEventListener("mouseup", this.onDragEndHandler);
-        document.addEventListener("mousemove", this.onDragHandler);
-        this.handle.addEventListener("dragstart", event =>
-          event.preventDefault()
-        );
-      });
+      document.addEventListener("mouseup", this.onDragEndHandler);
+      document.addEventListener("mousemove", this.onDragHandler);
+      this.handle.addEventListener("dragstart", event =>
+        event.preventDefault()
+      );
+    });
 
-      this.handle.addEventListener("touchstart", event => {
-        event.preventDefault();
-        // Remove CSS animation class from slider and top layer
-        this.removeAnimation();
+    this.handle.addEventListener("touchstart", event => {
+      event.preventDefault();
+      // Remove CSS animation class from slider and top layer
+      this.removeAnimation();
 
-        document.addEventListener("touchend", this.onDragEndHandler);
-        document.addEventListener("touchmove", this.onDragHandler);
-      });
-    } else {
-      this.handle.addEventListener("click", event => {
-        event.preventDefault();
-        // Remove CSS animation class from slider and top layer
-        this.removeAnimation();
+      document.addEventListener("touchend", this.onDragEndHandler);
+      document.addEventListener("touchmove", this.onDragHandler);
+    });
 
-        this.completeSlide(event);
-      });
+    this.handle.addEventListener("click", event => {
+      event.preventDefault();
+      // Remove CSS animation class from slider and top layer
+      this.removeAnimation();
 
-      this.handle.addEventListener("touchstart", event => {
-        event.preventDefault();
-        // Remove CSS animation class from slider and top layer
-        this.removeAnimation();
+      this.completeSlide(event);
+    });
 
-        this.completeSlide(event);
-      });
-    }
+    this.handle.addEventListener("touchstart", event => {
+      event.preventDefault();
+      // Remove CSS animation class from slider and top layer
+      this.removeAnimation();
+
+      this.completeSlide(event);
+    });
 
     /**
      * Add events when the close icon is clicked or tapped
@@ -135,6 +133,11 @@ class ScreenSlider {
     this.topLayer.classList.remove("top-layer-animation");
   }
 
+  addAnimation() {
+    this.slider.classList.add("slider-animation");
+    this.topLayer.classList.add("top-layer-animation");
+  }
+
   updateOpacity(event) {
     let positionX = event.pageX;
     let windowWidth = window.innerWidth;
@@ -151,19 +154,20 @@ class ScreenSlider {
 
     //Update bottom layer opacity
     this.bottomContainer.style.opacity = 1;
+    // Hide handle
+    this.updateHandle("hide");
     let movement = setInterval(() => {
       // When the position is lower than 0 then stop the animation
       if (currentPosition < 0) {
         clearInterval(movement);
         this.sliderPosition = currentPosition;
         this.updateCloseIcon("show");
-        this.updateHandle("hide");
       } else {
         currentPosition = currentPosition - 10;
         this.slider.style.left = currentPosition + "px";
         this.topLayer.style.width = currentPosition + this.skew + "px";
       }
-    }, 1);
+    }, 0.000000001);
   }
 
   updateCloseIcon(action) {
@@ -190,11 +194,13 @@ class ScreenSlider {
         clearInterval(movement);
         this.updateCloseIcon("hide");
         this.updateHandle("show");
+        this.topContainer.style.opacity = 1;
+        this.bottomContainer.style.opacity = 0.5;
       } else {
-        currentPosition = currentPosition + 5;
+        currentPosition = currentPosition + 10;
         this.slider.style.left = currentPosition + "px";
         this.topLayer.style.width = currentPosition + this.skew + "px";
       }
-    }, 5);
+    }, 0.000000001);
   }
 }

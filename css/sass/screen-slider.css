@@ -14,7 +14,7 @@ body {
 .wrapper-split-content {
   position: relative;
   width: 100%;
-  min-height: 55vw;
+  height: 55vw;
   overflow: hidden;
 }
 
@@ -83,7 +83,7 @@ body {
   position: absolute;
   top: 5%;
   left: 7%;
-  font-size: 1.2em;
+  font-size: 1em;
   cursor: pointer;
 }
 
@@ -121,8 +121,8 @@ body {
   cursor: pointer;
   position: absolute;
   top: 50%;
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   background-color: #282c2b;
   border-radius: 50%;
   display: -webkit-box;
@@ -138,8 +138,12 @@ body {
 }
 
 .handle:hover {
-  width: 105px;
-  height: 105px;
+  width: 120px;
+  height: 120px;
+}
+
+.handle:hover i {
+  font-size: 1.5em;
 }
 
 .skewed .slider {
