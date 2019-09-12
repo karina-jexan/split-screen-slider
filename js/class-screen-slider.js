@@ -96,6 +96,7 @@ class ScreenSlider {
     };
 
     this.dragEnd = function(event) {
+      this.completeSlide(event);
       document.removeEventListener("mouseup", this.onDragEndHandler);
       document.removeEventListener("mousemove", this.onDragHandler);
 
